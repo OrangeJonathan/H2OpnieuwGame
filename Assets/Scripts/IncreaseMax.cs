@@ -14,6 +14,10 @@ public class IncreaseMax : MonoBehaviour
     [SerializeField] ButtonManager ButtonManager;
     [SerializeField] funnelManager funnelManager;
     [SerializeField] GameManager gameManager;
+    [SerializeField] MoneyManager moneyManager;
+    [SerializeField] WaterManager waterManager;
+
+
     [Header("Upgrade")]
     public Upgrades increaseMax = new Upgrades();
 
@@ -25,8 +29,8 @@ public class IncreaseMax : MonoBehaviour
         increaseMax.name = "increaseMaxWater";
         increaseMax.upgradeLevel = 0;
         increaseMax.cost = 1;
-        // de multiplier geld hier as een +
-        increaseMax.costMultiplier = 1;
+        // multiplier word hier gebruikt als een addition
+        increaseMax.costMultiplier = 2;
         
     }
 
@@ -34,16 +38,17 @@ public class IncreaseMax : MonoBehaviour
     public void increaseMaxClicked()
     {
         // Betaal systeem, als je water hoger of gelijk is aan de prijs "cost"
-        if (gameManager.water >= increaseMax.cost)
+        if (moneyManager.money >= increaseMax.cost)
         {
            
             Debug.Log("Increased Max");
             // Set Max Water + 3
-            ButtonManager.maxWater += 3;
+            waterManager.maxWater += 3;
             // Zet water aantal naar water - cost
-            gameManager.water = gameManager.water - increaseMax.cost;
-            // set text naar water/MaxWater
-            gameManager.printWater();
+            moneyManager.money = moneyManager.money - increaseMax.cost;
+            // set text naar water/MaxWater en Money
+            moneyManager.printMoney();
+            waterManager.printWater();   
             // Maak duurder
             increaseMax.cost = increaseMax.cost + increaseMax.costMultiplier;
         }

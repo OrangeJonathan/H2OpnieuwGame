@@ -12,11 +12,13 @@ public class funnelManager : MonoBehaviour
     [SerializeField] ButtonManager ButtonManager;
     [SerializeField] IncreaseMax IncreaseMax;
     [SerializeField] GameManager gameManager;
+    [SerializeField] MoneyManager moneyManager;
+    [SerializeField] WaterManager waterManager;
 
     Upgrades Funnel = new Upgrades();
 
 
-    int level;
+    public int level;
 
     public void Start()
     {
@@ -24,7 +26,7 @@ public class funnelManager : MonoBehaviour
         Funnel.name = "Funnel";
         Funnel.upgradeLevel = 0;
         Funnel.cost = 1;
-        Funnel.costMultiplier = 1.1;
+        Funnel.costMultiplier = 1.3;
 
         level = Funnel.getLevel();
     }
@@ -38,9 +40,22 @@ public class funnelManager : MonoBehaviour
     // Wanneer op knop gedrukt
     public void funnelClicked()
     {
+        if(moneyManager.money >= Funnel.cost)
+        {
+            moneyManager.money -= Funnel.cost;
+            moneyManager.printMoney();
+            level++;
+            Debug.Log(level);
+            waterManager.autoWater += 1;
+
+
+            Funnel.cost = Funnel.cost * Funnel.costMultiplier;
+        }
+
+
 
         //print water aantal
-        gameManager.printWater();
+        moneyManager.printMoney();
     }
 
 }
