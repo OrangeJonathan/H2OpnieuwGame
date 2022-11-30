@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class ButtonManager : MonoBehaviour
 {
 
-
-
     //Link scripts
     [Header("Scripts")]
     [SerializeField] IncreaseMax increaseMax;
@@ -46,17 +44,17 @@ public class ButtonManager : MonoBehaviour
 
         // check increase max button input
         Button btnIncreaseMax = increaseMaxButton.GetComponent<Button>();
-        btnIncreaseMax.onClick.AddListener(increaseMaxOnClick);
+        btnIncreaseMax.onClick.AddListener(IncreaseMaxOnClick);
 
         // check funnel button input
         Button btnFunnel = funnelButton.GetComponent<Button>();
         Text txtFunnel = funnelButtonText.GetComponent<Text>();
-        btnFunnel.onClick.AddListener(funnelOnClick);
+        btnFunnel.onClick.AddListener(FunnelOnClick);
 
         // check sell all button input
         Button btnSellAll = sellButton.GetComponent<Button>();
         Text txtMoney = moneyText.GetComponent<Text>();
-        btnSellAll.onClick.AddListener(sellAllOnClick);
+        btnSellAll.onClick.AddListener(SellAllOnClick);
     }
 
     // als main clicked
@@ -66,7 +64,7 @@ public class ButtonManager : MonoBehaviour
     }
 
     // click increase max
-    void increaseMaxOnClick()
+    void IncreaseMaxOnClick()
     {
         // activeer deze functie in ander script
         increaseMax.increaseMaxClicked();
@@ -76,10 +74,10 @@ public class ButtonManager : MonoBehaviour
 
 
     // click increase max
-    void funnelOnClick()
+    void FunnelOnClick()
     {
 
-        funnelManager.funnelClicked();
+        funnelManager.FunnelClicked();
         // check of eerste keer geklickt op deze knop
         funnelPressedFirst = true;
         
@@ -97,7 +95,7 @@ public class ButtonManager : MonoBehaviour
 
     }
 
-    void sellAllOnClick()
+    void SellAllOnClick()
     {
         if (waterManager.water == 0) return;
 

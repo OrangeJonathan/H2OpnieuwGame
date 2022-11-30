@@ -3,11 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncreaseMax : MonoBehaviour
+public class IncreaseMax : parentClass
 {
-
-    
-
 
     // Link script naar andere Scripts.
     [Header("Scripts")]
@@ -17,20 +14,18 @@ public class IncreaseMax : MonoBehaviour
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
 
-
-    [Header("Upgrade")]
-    public Upgrades increaseMax = new Upgrades();
+    Upgrades upgrades = new Upgrades();
 
     //Start
     void Start()
     {
 
         // Set variabelen van Upgrade uit "Upgrades" Class
-        increaseMax.name = "increaseMaxWater";
-        increaseMax.upgradeLevel = 0;
-        increaseMax.cost = 1;
+        upgrades.nameUpgrade = "increaseMaxWater";
+        upgrades.upgradeLevel = 0;
+        upgrades.cost = 1;
         // multiplier word hier gebruikt als een addition
-        increaseMax.costMultiplier = 2;
+        upgrades.costMultiplier = 2;
         
     }
 
@@ -38,19 +33,19 @@ public class IncreaseMax : MonoBehaviour
     public void increaseMaxClicked()
     {
         // Betaal systeem, als je water hoger of gelijk is aan de prijs "cost"
-        if (moneyManager.money >= increaseMax.cost)
+        if (moneyManager.money >= upgrades.cost)
         {
            
             Debug.Log("Increased Max");
             // Set Max Water + 3
             waterManager.maxWater += 3;
             // Zet water aantal naar water - cost
-            moneyManager.money = moneyManager.money - increaseMax.cost;
+            moneyManager.money = moneyManager.money - upgrades.cost;
             // set text naar water/MaxWater en Money
             moneyManager.printMoney();
-            waterManager.printWater();   
+            waterManager.printWater();
             // Maak duurder
-            increaseMax.cost = increaseMax.cost + increaseMax.costMultiplier;
+            upgrades.cost += upgrades.costMultiplier;
         }
 
         // niet genoeg water
