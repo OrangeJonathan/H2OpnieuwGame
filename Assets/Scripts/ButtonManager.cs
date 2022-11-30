@@ -15,6 +15,8 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] IncreaseMax increaseMax;
     [SerializeField] funnelManager funnelManager;
     [SerializeField] GameManager gameManager;
+    [SerializeField] MoneyManager moneyManager;
+    [SerializeField] WaterManager waterManager;
 
     // main button
     [Header("Main Button")]
@@ -31,10 +33,10 @@ public class ButtonManager : MonoBehaviour
     public Text funnelButtonText;
     bool funnelPressedFirst = false;
 
-    // Water Variables
-    [Header("Max Water")]
-    public int maxWater = 5;
-    
+    [Header("Sell Button")]
+    public Button sellButton;
+    public Text moneyText;
+
     void Start()
     {
         // check main button input
@@ -50,27 +52,17 @@ public class ButtonManager : MonoBehaviour
         Button btnFunnel = funnelButton.GetComponent<Button>();
         Text txtFunnel = funnelButtonText.GetComponent<Text>();
         btnFunnel.onClick.AddListener(funnelOnClick);
+
+        // check sell all button input
+        Button btnSellAll = sellButton.GetComponent<Button>();
+        Text txtMoney = moneyText.GetComponent<Text>();
+        btnSellAll.onClick.AddListener(sellAllOnClick);
     }
 
     // als main clicked
     void MainOnClick()
     {
-        // voorkomt meer water dan max
-        if (gameManager.water < maxWater)
-        {
-            gameManager.water++;
-            // Check if +1 niet over de max gaat, gaat dat wel, maak dan het water gelijk aan max water
-            if (gameManager.water > maxWater)
-            {
-                // water = maxWater
-                gameManager.water = maxWater;
-            }
-            // water + 1
-            
-        }
-        Debug.Log("+1");
-        // print
-        gameManager.printWater();
+        waterManager.clickWater();
     }
 
     // click increase max
@@ -82,28 +74,40 @@ public class ButtonManager : MonoBehaviour
     }
 
 
-    // control int for funnelOnClick
-    int control = 0;
 
     // click increase max
     void funnelOnClick()
     {
+
+        funnelManager.funnelClicked();
         // check of eerste keer geklickt op deze knop
         funnelPressedFirst = true;
         
         // als wel eerste keer is
-        if (funnelPressedFirst && control == 0)
+        if (funnelPressedFirst && funnelManager.level == 1)
         {
             
             // set button text naar dit VVVVVVV
             funnelButtonText.text = "Upgrade Funnel";
             // verander naar control = 1 voor eenmalige uitvoering van deze functie.
-            control = 1;
         }
 
         // activeer deze functie in ander script
-        funnelManager.funnelClicked();
+        
 
+    }
+
+    void sellAllOnClick()
+    {
+        if (waterManager.water == 0) return;
+
+        // sell water
+        moneyManager.money += waterManager.water * moneyManager.moneyMultiplier;
+        Debug.Log(moneyManager.money);
+        waterManager.water = 0;
+        waterManager.printWater();
+        moneyManager.printMoney();
+        
     }
 
 }

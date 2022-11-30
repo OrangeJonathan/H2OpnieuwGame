@@ -11,20 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] ButtonManager buttonManager;
     [SerializeField] funnelManager funnelManager;
     [SerializeField] IncreaseMax increaseMax;
-
-    [Header("Water")]
-    public double water;
-    public double autoWater;
+    [SerializeField] MoneyManager moneyManager;
+    [SerializeField] WaterManager waterManager;
 
 
-
-    // print water
-   public void printWater()
-    {
-
-        Debug.Log("amount Water: " + water + "  " + "max Water: " + buttonManager.maxWater);
-        buttonManager.mainButtonText.text = Math.Round(water, 2).ToString() + "/" + buttonManager.maxWater.ToString();
-    }
-    
+  
 
 }
