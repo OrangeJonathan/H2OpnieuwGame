@@ -101,6 +101,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (waterManager.water == 0) return;
 
+        // sell water
         moneyManager.money += waterManager.water * moneyManager.moneyMultiplier;
         Debug.Log(moneyManager.money);
         waterManager.water = 0;

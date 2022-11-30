@@ -15,18 +15,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] WaterManager waterManager;
 
 
-    
-
-
-
-    // verander Money text naar het accurate aantal moneyz
-    
-
-
-
-
-    // print water
-   
-    
+  
 
 }
