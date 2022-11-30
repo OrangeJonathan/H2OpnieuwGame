@@ -62,22 +62,7 @@ public class ButtonManager : MonoBehaviour
     // als main clicked
     void MainOnClick()
     {
-        // voorkomt meer water dan max
-        if (waterManager.water < waterManager.maxWater)
-        {
-            waterManager.water++;
-            // Check if +1 niet over de max gaat, gaat dat wel, maak dan het water gelijk aan max water
-            if (waterManager.water > waterManager.maxWater)
-            {
-                // water = maxWater
-                waterManager.water = waterManager.maxWater;
-            }
-            // water + 1
-            
-        }
-        Debug.Log("+1");
-        // print
-        waterManager.printWater();
+        waterManager.clickWater();
     }
 
     // click increase max

@@ -16,7 +16,7 @@ public class MoneyManager : MonoBehaviour
 
     [Header("Money")]
     public double money;
-    public double moneyMultiplier = 0;
+    public double moneyMultiplier = 1;
 
    
 
