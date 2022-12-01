@@ -1,12 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class IncreaseMax : MonoBehaviour
-
+public class ClickUpManager : MonoBehaviour
 {
-
     // Link script naar andere Scripts.
     [Header("Scripts")]
     [SerializeField] ButtonManager ButtonManager;
@@ -15,6 +13,7 @@ public class IncreaseMax : MonoBehaviour
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
     [SerializeField] ShopManager shopManager;
+    
 
     [Header("UpgradeProperties")]
     public Upgrades upgrades;
@@ -23,21 +22,23 @@ public class IncreaseMax : MonoBehaviour
     void Start()
     {
 
+    }
+
+    
+
+    // Methode elke keer als de knop "Click Upgrade" wordt geklikt.
+    public void clickUpClicked()
+    {
         
 
 
-    }
-
-    // Methode elke keer als de knop "Increase Max" wordt geklikt.
-    public void increaseMaxClicked()
-    {
         // Betaal systeem, als je water hoger of gelijk is aan de prijs "cost"
         if (moneyManager.money >= upgrades.cost)
         {
-           
+
             Debug.Log("Increased Max");
             // Set Max Water + 3
-            waterManager.maxWater += 3;
+            waterManager.waterPower += 1;
             // Zet water aantal naar water - cost
             moneyManager.money = moneyManager.money - upgrades.cost;
             // set text naar water/MaxWater en Money
@@ -49,17 +50,19 @@ public class IncreaseMax : MonoBehaviour
             // Maak duurder
             upgrades.cost += upgrades.costMultiplier;
 
-            // Set level en Cost
-            shopManager.incMaxLevel.text = upgrades.upgradeLevel.ToString();
-            shopManager.incMaxCost.text = upgrades.cost.ToString();
+            //Set level en Cost
+            shopManager.clickUpLevel.text = upgrades.upgradeLevel.ToString();
+            shopManager.clickUpCost.text = upgrades.cost.ToString();
         }
+
 
         // niet genoeg water
         else
         {
+            
             Debug.Log("niet genoeg");
         }
 
-        
+
     }
 }

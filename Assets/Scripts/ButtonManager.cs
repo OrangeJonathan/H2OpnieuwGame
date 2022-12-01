@@ -73,6 +73,8 @@ public class ButtonManager : MonoBehaviour
         waterManager.printWater();
         moneyManager.printMoney();
         
+
+
     }
 
 

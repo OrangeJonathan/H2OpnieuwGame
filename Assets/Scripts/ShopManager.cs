@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,21 +13,30 @@ public class ShopManager : MonoBehaviour
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
     [SerializeField] ButtonManager buttonManager;
+    [SerializeField] ClickUpManager clickUpManager;
 
     [Header("Exit Shop")]
     public Button exitShopButton;
 
-
+    [Header("Click Upgrade")]
+    public Button clickUpButton;
+    public Text clickUpLevel;
+    public Text clickUpCost;
 
     // increase max button
-    [Header("Increase Max Button")]
+    [Header("Increase Max")]
     public Button increaseMaxButton;
+    public Text incMaxLevel;
+    public Text incMaxCost;
 
     // funnel button
-    [Header("Funnel Button")]
+    [Header("Funnel")]
     public Button funnelButton;
     public Text funnelButtonText;
+    public Text funnelLevel;
+    public Text funnelCost;
     bool funnelPressedFirst = false;
+
 
 
     void Start()
@@ -37,16 +47,29 @@ public class ShopManager : MonoBehaviour
         Button btnExitShop = exitShopButton.GetComponent<Button>();
         btnExitShop.onClick.AddListener(exitShop);
 
+        // check Click Upgrade button input
+        Button btnClickUp = clickUpButton.GetComponent<Button>();
+        Text txtClickUpLevel = clickUpLevel.GetComponent<Text>();
+        btnClickUp.onClick.AddListener(clickUpOnClick);
+
+
         // check increase max button input
         Button btnIncreaseMax = increaseMaxButton.GetComponent<Button>();
+        Text txtIncMaxLevel = incMaxLevel.GetComponent<Text>();
         btnIncreaseMax.onClick.AddListener(IncreaseMaxOnClick);
 
         // check funnel button input
         Button btnFunnel = funnelButton.GetComponent<Button>();
         Text txtFunnel = funnelButtonText.GetComponent<Text>();
+        Text txtFunnelLevel = funnelLevel.GetComponent<Text>();
         btnFunnel.onClick.AddListener(FunnelOnClick);
 
 
+    }
+
+    public void Update()
+    {
+        AffordableColor();
     }
 
     void exitShop()
@@ -56,7 +79,64 @@ public class ShopManager : MonoBehaviour
         buttonManager.shopEnabled = false;
         buttonManager.shop.enabled = false;
 
+
+
     }
+
+    public void AffordableColor()
+    {
+        // check if clickup can afford
+        if (moneyManager.money < clickUpManager.upgrades.cost)
+        {
+            clickUpButton.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            clickUpButton.GetComponent<Image>().color = Color.green;
+        }
+
+        
+
+        // check if Increase Max can afford
+        if (moneyManager.money < increaseMax.upgrades.cost) 
+
+        {
+            increaseMaxButton.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            increaseMaxButton.GetComponent<Image>().color = Color.green;
+        }
+
+
+        // check if Funnel can afford
+        if (moneyManager.money < funnelManager.upgrades.cost)
+
+        {
+            funnelButton.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            funnelButton.GetComponent<Image>().color = Color.green;
+        }
+
+
+
+
+
+    }
+
+
+
+
+    void clickUpOnClick()
+    {
+        clickUpManager.clickUpClicked();
+
+    }
+
+
+
 
     void IncreaseMaxOnClick()
     {

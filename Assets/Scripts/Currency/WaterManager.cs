@@ -17,7 +17,7 @@ public class WaterManager : MonoBehaviour
 
     [Header("Water")]
     public double water = 0;
-    public double waterMultiplier = 1;
+    public double waterPower = 1;
     public int maxWater = 5;
     public double autoWater = 0;
     public double autoWaterMs = 0;
@@ -57,14 +57,14 @@ public class WaterManager : MonoBehaviour
         {
             
             // Check if water multiplier niet over de max gaat, gaat dat wel, maak dan het water gelijk aan max water
-            if ((water + waterMultiplier) > maxWater)
+            if ((water + waterPower) > maxWater)
             {
                 // water = maxWater
                 water = maxWater;
             }
             else
             {
-                water = water + waterMultiplier;
+                water += waterPower;
             }
 
         }
