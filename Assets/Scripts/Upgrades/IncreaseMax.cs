@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IncreaseMax : parentClass
+public class IncreaseMax : MonoBehaviour
+
 {
 
     // Link script naar andere Scripts.
@@ -14,19 +15,16 @@ public class IncreaseMax : parentClass
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
 
-    Upgrades upgrades = new Upgrades();
+    [Header("UpgradeProperties")]
+    public Upgrades upgrades;
 
     //Start
     void Start()
     {
 
-        // Set variabelen van Upgrade uit "Upgrades" Class
-        upgrades.nameUpgrade = "increaseMaxWater";
-        upgrades.upgradeLevel = 0;
-        upgrades.cost = 1;
-        // multiplier word hier gebruikt als een addition
-        upgrades.costMultiplier = 2;
         
+
+
     }
 
     // Methode elke keer als de knop "Increase Max" wordt geklikt.
@@ -44,6 +42,9 @@ public class IncreaseMax : parentClass
             // set text naar water/MaxWater en Money
             moneyManager.printMoney();
             waterManager.printWater();
+            // set upgradelevel
+            upgrades.upgradeLevel++;
+
             // Maak duurder
             upgrades.cost += upgrades.costMultiplier;
         }

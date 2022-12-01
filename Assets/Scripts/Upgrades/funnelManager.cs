@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class funnelManager : parentClass
+public class funnelManager : MonoBehaviour
 {
 
     // Link scripts
@@ -14,21 +14,19 @@ public class funnelManager : parentClass
     [SerializeField] GameManager gameManager;
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
-
-    Upgrades upgrades = new Upgrades();
-
-
     public int level;
+
+
+    [Header("UpgradeProperties")]
+    public Upgrades upgrades;
+
+
+    
 
     public void Start()
     {
-        // Set variabelen van Upgrade uit "Upgrades" Class
-        upgrades.nameUpgrade = "Funnel";
-        upgrades.upgradeLevel = 0;
-        upgrades.cost = 1;
-        upgrades.costMultiplier = 1.3;
 
-        level = upgrades.getLevel();
+        level = upgrades.getLevel(upgrades.upgradeLevel);
     } 
 
     // Wanneer op knop gedrukt
@@ -39,6 +37,7 @@ public class funnelManager : parentClass
             moneyManager.money -= upgrades.cost;
             moneyManager.printMoney();
             level++;
+            upgrades.upgradeLevel++;
             Debug.Log(level);
             waterManager.autoWater += 1;
 

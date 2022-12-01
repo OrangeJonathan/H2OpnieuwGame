@@ -20,9 +20,10 @@ public class WaterManager : MonoBehaviour
     public double waterMultiplier = 1;
     public int maxWater = 5;
     public double autoWater = 0;
+    public double autoWaterMs = 0;
 
 
-    public int DelayAmount = 1; // Second count
+    public double DelayAmount = 0.01; // Second count
 
     protected float Timer;
 
@@ -30,21 +31,23 @@ public class WaterManager : MonoBehaviour
     {
         Timer += Time.deltaTime;
 
-       
-        if (Timer >= DelayAmount)
-        {
+        autoWaterMs = (autoWater / 100);
+
+
+       if (autoWater == 0) return;
+
+       if (Timer >= DelayAmount)
+       {
             Timer = 0f;
-            water += autoWater;
+            water += autoWaterMs;
             if (water > maxWater)
             {
                 water = maxWater;
                 printWater();
             }
-            printWater();
+           printWater();
+       }
 
-
-
-        }
     }
 
     public void clickWater()
