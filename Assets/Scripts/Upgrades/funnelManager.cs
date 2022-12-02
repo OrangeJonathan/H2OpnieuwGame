@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class funnelManager : MonoBehaviour
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
     [SerializeField] ShopManager shopManager;
+    [SerializeField] ClickUpManager clickUpManager;
     public int level;
 
 
@@ -26,8 +28,12 @@ public class funnelManager : MonoBehaviour
 
     public void Start()
     {
-
-        level = upgrades.getLevel(upgrades.upgradeLevel);
+        shopManager.funnelButton.enabled = false;
+        shopManager.funnelButton.image.enabled = false;
+        shopManager.funnelButtonText.enabled = false;
+        shopManager.funnelCost.enabled = false;
+        shopManager.funnelLevel.enabled = false;
+        level = upgrades.upgradeLevel;
     } 
 
     // Wanneer op knop gedrukt
@@ -48,17 +54,28 @@ public class funnelManager : MonoBehaviour
 
             // duurder maken
             upgrades.cost = upgrades.cost * upgrades.costMultiplier;
-
+            
             // Set Level en Cost
             shopManager.funnelLevel.text = upgrades.upgradeLevel.ToString();
-            shopManager.funnelCost.text = upgrades.cost.ToString();
+            shopManager.funnelCost.text = Math.Round(upgrades.cost, 2).ToString();
         }
 
 
 
         //print water aantal
         moneyManager.printMoney();
+
+        if ((upgrades.upgradeLevel >= 5) && clickUpManager.upgrades.upgradeLevel >= 20)
+        {
+            shopManager.waterFilterButton.enabled = true;
+            shopManager.waterFilterButton.image.enabled = true;
+            shopManager.waterFilterButtonText.enabled = true;
+            shopManager.waterFilterCost.enabled = true;
+            shopManager.waterFilterLevel.enabled = true;
+        }
     }
+
+
 
 }
 

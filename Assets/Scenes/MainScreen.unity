@@ -158,10 +158,11 @@ MonoBehaviour:
   moneyManager: {fileID: 940754898}
   waterManager: {fileID: 2072336384}
   shopManager: {fileID: 1055135540}
+  increaseMax: {fileID: 1619871568}
   upgrades:
     nameUpgrade: Click Upgrade
     upgradeLevel: 0
-    cost: 1
+    cost: 2
     costMultiplier: 1
 --- !u!4 &7739798
 Transform:
@@ -190,7 +191,7 @@ GameObject:
   - component: {fileID: 40313816}
   - component: {fileID: 40313815}
   m_Layer: 3
-  m_Name: CostText
+  m_Name: waterFilterButtonCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +250,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: '300
+
+'
 --- !u!222 &40313816
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -574,7 +577,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -653,11 +656,12 @@ MonoBehaviour:
   moneyManager: {fileID: 940754898}
   waterManager: {fileID: 2072336384}
   shopManager: {fileID: 1055135540}
+  clickUpManager: {fileID: 7739797}
   level: 0
   upgrades:
     nameUpgrade: Funnel
     upgradeLevel: 0
-    cost: 1
+    cost: 100
     costMultiplier: 1.3
 --- !u!1 &184901639
 GameObject:
@@ -691,6 +695,7 @@ Transform:
   - {fileID: 1619871567}
   - {fileID: 184118368}
   - {fileID: 1055135539}
+  - {fileID: 1724987219}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -787,7 +792,7 @@ GameObject:
   - component: {fileID: 229377607}
   - component: {fileID: 229377606}
   m_Layer: 3
-  m_Name: upgradeButton2
+  m_Name: waterFilterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1070,7 +1075,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -426, y: -47.142456}
+  m_AnchoredPosition: {x: -313, y: -103.142456}
   m_SizeDelta: {x: 270.149, y: 58.4666}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &280957491
@@ -1152,7 +1157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 417, y: -154}
+  m_AnchoredPosition: {x: 304, y: -85}
   m_SizeDelta: {x: 270.1465, y: 177.4753}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &289879322
@@ -1323,7 +1328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -426, y: 167}
+  m_AnchoredPosition: {x: -313, y: 111}
   m_SizeDelta: {x: 270.1465, y: 177.4753}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &477901719
@@ -1823,8 +1828,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663064414}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.11786}
+  m_LocalScale: {x: 0.7520928, y: 0.7520928, z: 0.7520928}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 628996546}
@@ -1833,8 +1838,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 579, y: 270.5}
-  m_SizeDelta: {x: 1158, y: 541}
+  m_AnchoredPosition: {x: 479, y: 204}
+  m_SizeDelta: {x: 1162.9802, y: 552.6205}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &667031705
 GameObject:
@@ -2096,7 +2101,7 @@ GameObject:
   - component: {fileID: 799677851}
   - component: {fileID: 799677850}
   m_Layer: 3
-  m_Name: LevelText
+  m_Name: waterFitlterButtonLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2346,17 +2351,24 @@ MonoBehaviour:
   waterManager: {fileID: 2072336384}
   buttonManager: {fileID: 234412782}
   clickUpManager: {fileID: 7739797}
+  waterFilter: {fileID: 1724987220}
   exitShopButton: {fileID: 1419179337}
   clickUpButton: {fileID: 1713932532}
+  clickUpButtonText: {fileID: 1305393361}
   clickUpLevel: {fileID: 149971230}
   clickUpCost: {fileID: 1748279560}
   increaseMaxButton: {fileID: 791320755}
+  increaseMaxButtonText: {fileID: 130925071}
   incMaxLevel: {fileID: 2144312618}
   incMaxCost: {fileID: 1922791313}
   funnelButton: {fileID: 667031707}
   funnelButtonText: {fileID: 188624485}
   funnelLevel: {fileID: 1860517252}
   funnelCost: {fileID: 1411392882}
+  waterFilterButton: {fileID: 229377606}
+  waterFilterButtonText: {fileID: 1589617478}
+  waterFilterLevel: {fileID: 799677850}
+  waterFilterCost: {fileID: 40313815}
 --- !u!1 &1169783008
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,7 +2794,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 100
 --- !u!222 &1411392883
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3110,7 +3122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -426, y: 28.996689}
+  m_AnchoredPosition: {x: -313, y: -27.003311}
   m_SizeDelta: {x: 270.149, y: 58.4664}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1489105552
@@ -3207,7 +3219,7 @@ GameObject:
   - component: {fileID: 1589617479}
   - component: {fileID: 1589617478}
   m_Layer: 3
-  m_Name: updateButton2Text
+  m_Name: waterFilterButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3266,7 +3278,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Upgrade
+  m_Text: Water Filter
 --- !u!222 &1589617479
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3325,10 +3337,11 @@ MonoBehaviour:
   moneyManager: {fileID: 940754898}
   waterManager: {fileID: 2072336384}
   shopManager: {fileID: 1055135540}
+  clickUpManager: {fileID: 7739797}
   upgrades:
     nameUpgrade: Increase Max
     upgradeLevel: 0
-    cost: 1
+    cost: 4
     costMultiplier: 2
 --- !u!1 &1633618043
 GameObject:
@@ -3534,6 +3547,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713932530}
   m_CullTransparentMesh: 1
+--- !u!1 &1724987218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1724987219}
+  - component: {fileID: 1724987220}
+  m_Layer: 0
+  m_Name: waterFilter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1724987219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724987218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 184901640}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1724987220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724987218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c68aa497090a34f96e51fafab7156e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonManager: {fileID: 234412782}
+  funnelManager: {fileID: 184118369}
+  gameManager: {fileID: 311178884}
+  moneyManager: {fileID: 940754898}
+  waterManager: {fileID: 2072336384}
+  shopManager: {fileID: 1055135540}
+  increaseMax: {fileID: 1619871568}
+  clickUpManager: {fileID: 7739797}
+  upgrades:
+    nameUpgrade: Water Filter
+    upgradeLevel: 0
+    cost: 300
+    costMultiplier: 2
 --- !u!1 &1748279558
 GameObject:
   m_ObjectHideFlags: 0
@@ -3569,7 +3639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7, y: -35.997803}
+  m_AnchoredPosition: {x: -6.9999847, y: -35.997803}
   m_SizeDelta: {x: 0, y: -76.2038}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1748279560
@@ -3605,7 +3675,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 2
 --- !u!222 &1748279561
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3880,7 +3950,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 4
 --- !u!222 &1922791314
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class IncreaseMax : MonoBehaviour
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
     [SerializeField] ShopManager shopManager;
+    [SerializeField] ClickUpManager clickUpManager;
 
     [Header("UpgradeProperties")]
     public Upgrades upgrades;
@@ -22,8 +23,11 @@ public class IncreaseMax : MonoBehaviour
     //Start
     void Start()
     {
-
-        
+        shopManager.increaseMaxButton.enabled = false;
+        shopManager.increaseMaxButton.image.enabled = false;
+        shopManager.increaseMaxButtonText.enabled = false;
+        shopManager.incMaxCost.enabled = false;
+        shopManager.incMaxLevel.enabled = false;
 
 
     }
@@ -48,10 +52,10 @@ public class IncreaseMax : MonoBehaviour
 
             // Maak duurder
             upgrades.cost += upgrades.costMultiplier;
-
+            
             // Set level en Cost
             shopManager.incMaxLevel.text = upgrades.upgradeLevel.ToString();
-            shopManager.incMaxCost.text = upgrades.cost.ToString();
+            shopManager.incMaxCost.text = Math.Round(upgrades.cost, 2).ToString();
         }
 
         // niet genoeg water
@@ -60,6 +64,17 @@ public class IncreaseMax : MonoBehaviour
             Debug.Log("niet genoeg");
         }
 
-        
+
+        // Enable next upgrade, increase max
+        if (upgrades.upgradeLevel >= 10)
+        {
+            shopManager.funnelButton.enabled = true;
+            shopManager.funnelButton.image.enabled = true;
+            shopManager.funnelButtonText.enabled = true;
+            shopManager.funnelCost.enabled = true;
+            shopManager.funnelLevel.enabled = true;
+        }
+
+
     }
 }

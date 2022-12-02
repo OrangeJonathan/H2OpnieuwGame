@@ -12,12 +12,5 @@ public class Upgrades
     public double costMultiplier;
 
 
-    public int getLevel(int upLvl)
-    {
-        int level = upLvl;
-        return level;
-    }
-
-
 
 }

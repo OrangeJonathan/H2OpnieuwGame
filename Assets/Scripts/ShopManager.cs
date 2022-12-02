@@ -14,18 +14,21 @@ public class ShopManager : MonoBehaviour
     [SerializeField] WaterManager waterManager;
     [SerializeField] ButtonManager buttonManager;
     [SerializeField] ClickUpManager clickUpManager;
+    [SerializeField] WaterFilter waterFilter;
 
     [Header("Exit Shop")]
     public Button exitShopButton;
 
     [Header("Click Upgrade")]
     public Button clickUpButton;
+    public Text clickUpButtonText;
     public Text clickUpLevel;
     public Text clickUpCost;
 
     // increase max button
     [Header("Increase Max")]
     public Button increaseMaxButton;
+    public Text increaseMaxButtonText;
     public Text incMaxLevel;
     public Text incMaxCost;
 
@@ -37,6 +40,11 @@ public class ShopManager : MonoBehaviour
     public Text funnelCost;
     bool funnelPressedFirst = false;
 
+    [Header("Water Filter")]
+    public Button waterFilterButton;
+    public Text waterFilterButtonText;
+    public Text waterFilterLevel;
+    public Text waterFilterCost;
 
 
     void Start()
@@ -50,20 +58,30 @@ public class ShopManager : MonoBehaviour
         // check Click Upgrade button input
         Button btnClickUp = clickUpButton.GetComponent<Button>();
         Text txtClickUpLevel = clickUpLevel.GetComponent<Text>();
+        Text txtClickUpCost = clickUpCost.GetComponent<Text>();
         btnClickUp.onClick.AddListener(clickUpOnClick);
 
 
         // check increase max button input
         Button btnIncreaseMax = increaseMaxButton.GetComponent<Button>();
+        Text txtIncreaseMaxButton = increaseMaxButtonText.GetComponent<Text>();
         Text txtIncMaxLevel = incMaxLevel.GetComponent<Text>();
+        Text txtIncMax = incMaxCost.GetComponent<Text>();
         btnIncreaseMax.onClick.AddListener(IncreaseMaxOnClick);
 
         // check funnel button input
         Button btnFunnel = funnelButton.GetComponent<Button>();
         Text txtFunnel = funnelButtonText.GetComponent<Text>();
         Text txtFunnelLevel = funnelLevel.GetComponent<Text>();
+        Text txtFunnelCost = funnelCost.GetComponent<Text>();
         btnFunnel.onClick.AddListener(FunnelOnClick);
 
+        // check Water Filter Input
+        Button btnWaterFilter = waterFilterButton.GetComponent<Button>();
+        Text txtWaterFilterButton = waterFilterButtonText.GetComponent<Text>();
+        Text txtWaterFilterLevel = waterFilterLevel.GetComponent<Text>();
+        Text txtWaterFilterCost = waterFilterCost.GetComponent<Text>();
+        btnWaterFilter.onClick.AddListener(WaterFilterOnClick);
 
     }
 
@@ -78,9 +96,6 @@ public class ShopManager : MonoBehaviour
 
         buttonManager.shopEnabled = false;
         buttonManager.shop.enabled = false;
-
-
-
     }
 
     public void AffordableColor()
@@ -120,19 +135,20 @@ public class ShopManager : MonoBehaviour
             funnelButton.GetComponent<Image>().color = Color.green;
         }
 
-
-
-
+        if (moneyManager.money < waterFilter.upgrades.cost)
+        {
+            waterFilterButton.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            waterFilterButton.GetComponent <Image>().color = Color.green;
+        }
 
     }
-
-
-
 
     void clickUpOnClick()
     {
         clickUpManager.clickUpClicked();
-
     }
 
 
@@ -156,15 +172,15 @@ public class ShopManager : MonoBehaviour
         // als wel eerste keer is
         if (funnelPressedFirst && funnelManager.level == 1)
         {
-
             // set button text naar dit VVVVVVV
             funnelButtonText.text = "Upgrade Funnel";
             // verander naar control = 1 voor eenmalige uitvoering van deze functie.
         }
+    }
 
-        // activeer deze functie in ander script
-
-
+    void WaterFilterOnClick()
+    {
+        waterFilter.WaterFilterClicked();
     }
 
 

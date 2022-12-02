@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClickUpManager : MonoBehaviour
+public class WaterFilter : MonoBehaviour
 {
-    // Link script naar andere Scripts.
+
     [Header("Scripts")]
     [SerializeField] ButtonManager ButtonManager;
     [SerializeField] funnelManager funnelManager;
@@ -15,32 +15,32 @@ public class ClickUpManager : MonoBehaviour
     [SerializeField] WaterManager waterManager;
     [SerializeField] ShopManager shopManager;
     [SerializeField] IncreaseMax increaseMax;
-    
+    [SerializeField] ClickUpManager clickUpManager;
+
 
     [Header("UpgradeProperties")]
     public Upgrades upgrades;
 
-    //Start
-    void Start()
-    {
 
+    public void Start()
+    {
+        shopManager.waterFilterButton.enabled = false;
+        shopManager.waterFilterButton.image.enabled = false;
+        shopManager.waterFilterButtonText.enabled = false;
+        shopManager.waterFilterCost.enabled = false;
+        shopManager.waterFilterLevel.enabled = false;
     }
 
-    
-
-    // Methode elke keer als de knop "Click Upgrade" wordt geklikt.
-    public void clickUpClicked()
+    public void WaterFilterClicked()
     {
         
 
-
-        // Betaal systeem, als je water hoger of gelijk is aan de prijs "cost"
         if (moneyManager.money >= upgrades.cost)
         {
 
-            Debug.Log("Increased Clicks");
+            Debug.Log("Water Filter");
             // Set Max Water + 3
-            waterManager.waterPower += 1;
+            moneyManager.moneyMultiplier *= 1.5;
             // Zet water aantal naar water - cost
             moneyManager.money = moneyManager.money - upgrades.cost;
             // set text naar water/MaxWater en Money
@@ -50,31 +50,34 @@ public class ClickUpManager : MonoBehaviour
             upgrades.upgradeLevel++;
 
             // Maak duurder
-            upgrades.cost += upgrades.costMultiplier;
+            upgrades.cost *= upgrades.costMultiplier;
             
             //Set level en Cost
-            shopManager.clickUpLevel.text = upgrades.upgradeLevel.ToString();
-            shopManager.clickUpCost.text = Math.Round(upgrades.cost).ToString();
+            shopManager.waterFilterLevel.text = upgrades.upgradeLevel.ToString();
+            shopManager.waterFilterCost.text = Math.Round(upgrades.cost).ToString();
         }
 
-
-        // niet genoeg water
+        // niet genoeg moneyz
         else
         {
-            
+
             Debug.Log("niet genoeg");
         }
 
         // Enable next upgrade, increase max
-        if (upgrades.upgradeLevel >= 3)
-        {
-            shopManager.increaseMaxButton.enabled = true;
-            shopManager.increaseMaxButton.image.enabled = true;
-            shopManager.increaseMaxButtonText.enabled = true;
-            shopManager.incMaxCost.enabled = true;
-            shopManager.incMaxLevel.enabled = true;
-        }
+        
+
+
+
+
+
+
+
+
 
 
     }
+
+
+    
 }
