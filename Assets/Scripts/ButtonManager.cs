@@ -26,9 +26,12 @@ public class ButtonManager : MonoBehaviour
     [Header("Sell Button")]
     public Button sellButton;
     public Text moneyText;
+    public double moneyMultiplier;
+
 
     [Header("Shop")]
     public Button enterShopButton;
+
 
 
     public bool shopEnabled = true;
@@ -66,15 +69,12 @@ public class ButtonManager : MonoBehaviour
     {
         if (waterManager.water == 0) return;
 
-        // sell water
-        moneyManager.money += waterManager.water * moneyManager.moneyMultiplier;
+        moneyManager.increaseMoney(waterManager.water += moneyMultiplier);
         Debug.Log(moneyManager.money);
         waterManager.water = 0;
         waterManager.printWater();
         moneyManager.printMoney();
         
-
-
     }
 
 

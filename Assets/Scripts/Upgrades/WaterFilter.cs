@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WaterFilter : MonoBehaviour
+public class WaterFilter : Upgrades
 {
 
     [Header("Scripts")]
@@ -15,7 +15,13 @@ public class WaterFilter : MonoBehaviour
     [SerializeField] WaterManager waterManager;
     [SerializeField] ShopManager shopManager;
     [SerializeField] IncreaseMax increaseMax;
-    [SerializeField] ClickUpManager clickUpManager;
+    [SerializeField] ClickUpgrade clickUpManager;
+
+    [Header("Water Filter")]
+    public Button waterFilterButton;
+    public Text waterFilterButtonText;
+    public Text waterFilterLevel;
+    public Text waterFilterCost;
 
 
     [Header("UpgradeProperties")]
@@ -24,58 +30,49 @@ public class WaterFilter : MonoBehaviour
 
     public void Start()
     {
-        shopManager.waterFilterButton.enabled = false;
-        shopManager.waterFilterButton.image.enabled = false;
-        shopManager.waterFilterButtonText.enabled = false;
-        shopManager.waterFilterCost.enabled = false;
-        shopManager.waterFilterLevel.enabled = false;
+        //shopManager.waterFilterButton.enabled = false;
+        //shopManager.waterFilterButton.image.enabled = false;
+        //shopManager.waterFilterButtonText.enabled = false;
+        //shopManager.waterFilterCost.enabled = false;
+        //shopManager.waterFilterLevel.enabled = false;
+
+        Button btnWaterFilter = waterFilterButton.GetComponent<Button>();
+        Text txtWaterFilterButton = waterFilterButtonText.GetComponent<Text>();
+        Text txtWaterFilterLevel = waterFilterLevel.GetComponent<Text>();
+        Text txtWaterFilterCost = waterFilterCost.GetComponent<Text>();
+        btnWaterFilter.onClick.AddListener(WaterFilterClicked);
     }
 
     public void WaterFilterClicked()
     {
-        
-
         if (moneyManager.money >= upgrades.cost)
         {
 
             Debug.Log("Water Filter");
-            // Set Max Water + 3
-            moneyManager.moneyMultiplier *= 1.5;
-            // Zet water aantal naar water - cost
+
+            ButtonManager.moneyMultiplier *= 1.5;
+
             moneyManager.money = moneyManager.money - upgrades.cost;
-            // set text naar water/MaxWater en Money
+
             moneyManager.printMoney();
-            waterManager.printWater();
-            // set upgradelevel
             upgrades.upgradeLevel++;
 
             // Maak duurder
             upgrades.cost *= upgrades.costMultiplier;
-            
+
+            waterFilterButton.GetComponent<Image>().color = Color.green;
             //Set level en Cost
-            shopManager.waterFilterLevel.text = upgrades.upgradeLevel.ToString();
-            shopManager.waterFilterCost.text = Math.Round(upgrades.cost).ToString();
+            waterFilterLevel.text = upgrades.upgradeLevel.ToString();
+            waterFilterCost.text = Math.Round(upgrades.cost).ToString();
         }
 
         // niet genoeg moneyz
         else
         {
-
+            waterFilterButton.GetComponent<Image>().color = Color.red;
             Debug.Log("niet genoeg");
         }
-
-        // Enable next upgrade, increase max
         
-
-
-
-
-
-
-
-
-
-
     }
 
 

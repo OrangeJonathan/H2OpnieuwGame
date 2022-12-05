@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class IncreaseMax : MonoBehaviour
+public class IncreaseMax : Upgrades
 
 {
 
@@ -15,7 +16,14 @@ public class IncreaseMax : MonoBehaviour
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
     [SerializeField] ShopManager shopManager;
-    [SerializeField] ClickUpManager clickUpManager;
+    [SerializeField] ClickUpgrade clickUpManager;
+
+    [Header("Increase Max")]
+    public Button increaseMaxButton;
+    public Text increaseMaxButtonText;
+    public Text incMaxLevel;
+    public Text incMaxCost;
+
 
     [Header("UpgradeProperties")]
     public Upgrades upgrades;
@@ -23,13 +31,30 @@ public class IncreaseMax : MonoBehaviour
     //Start
     void Start()
     {
-        shopManager.increaseMaxButton.enabled = false;
-        shopManager.increaseMaxButton.image.enabled = false;
-        shopManager.increaseMaxButtonText.enabled = false;
-        shopManager.incMaxCost.enabled = false;
-        shopManager.incMaxLevel.enabled = false;
+        //shopManager.increaseMaxButton.enabled = false;
+        //shopManager.increaseMaxButton.image.enabled = false;
+        //shopManager.increaseMaxButtonText.enabled = false;
+        //shopManager.incMaxCost.enabled = false;
+        //shopManager.incMaxLevel.enabled = false;
+        Button btnIncreaseMax = increaseMaxButton.GetComponent<Button>();
+        Text txtIncreaseMaxButton = increaseMaxButtonText.GetComponent<Text>();
+        Text txtIncMaxLevel = incMaxLevel.GetComponent<Text>();
+        Text txtIncMax = incMaxCost.GetComponent<Text>();
+        btnIncreaseMax.onClick.AddListener(increaseMaxClicked);
 
+    }
 
+    public void Update()
+    {
+        if (moneyManager.money < upgrades.cost)
+
+        {
+            increaseMaxButton.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            increaseMaxButton.GetComponent<Image>().color = Color.green;
+        }
     }
 
     // Methode elke keer als de knop "Increase Max" wordt geklikt.
@@ -54,25 +79,14 @@ public class IncreaseMax : MonoBehaviour
             upgrades.cost += upgrades.costMultiplier;
             
             // Set level en Cost
-            shopManager.incMaxLevel.text = upgrades.upgradeLevel.ToString();
-            shopManager.incMaxCost.text = Math.Round(upgrades.cost, 2).ToString();
+            incMaxLevel.text = upgrades.upgradeLevel.ToString();
+            incMaxCost.text = Math.Round(upgrades.cost, 2).ToString();
         }
 
         // niet genoeg water
         else
         {
             Debug.Log("niet genoeg");
-        }
-
-
-        // Enable next upgrade, increase max
-        if (upgrades.upgradeLevel >= 10)
-        {
-            shopManager.funnelButton.enabled = true;
-            shopManager.funnelButton.image.enabled = true;
-            shopManager.funnelButtonText.enabled = true;
-            shopManager.funnelCost.enabled = true;
-            shopManager.funnelLevel.enabled = true;
         }
 
 
