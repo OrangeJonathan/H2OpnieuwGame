@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class ButtonManager : MonoBehaviour
 {
 
-
-
     //Link scripts
     [Header("Scripts")]
     [SerializeField] IncreaseMax increaseMax;
@@ -17,46 +15,42 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
+    [SerializeField] ShopManager shopManager;
 
     // main button
     [Header("Main Button")]
     public Button mainButton;
     public Text mainButtonText;
 
-    // increase max button
-    [Header("Increase Max Button")]
-    public Button increaseMaxButton;
-
-    // funnel button
-    [Header("Funnel Button")]
-    public Button funnelButton;
-    public Text funnelButtonText;
-    bool funnelPressedFirst = false;
-
+    
     [Header("Sell Button")]
     public Button sellButton;
     public Text moneyText;
 
+    [Header("Shop")]
+    public Button enterShopButton;
+
+
+    public bool shopEnabled = true;
+    public Canvas shop;
+
     void Start()
     {
+
+
         // check main button input
         Button btnMain = mainButton.GetComponent<Button>();
         Text txtMain = mainButtonText.GetComponent<Text>();
         btnMain.onClick.AddListener(MainOnClick);
 
-        // check increase max button input
-        Button btnIncreaseMax = increaseMaxButton.GetComponent<Button>();
-        btnIncreaseMax.onClick.AddListener(increaseMaxOnClick);
-
-        // check funnel button input
-        Button btnFunnel = funnelButton.GetComponent<Button>();
-        Text txtFunnel = funnelButtonText.GetComponent<Text>();
-        btnFunnel.onClick.AddListener(funnelOnClick);
-
         // check sell all button input
         Button btnSellAll = sellButton.GetComponent<Button>();
         Text txtMoney = moneyText.GetComponent<Text>();
-        btnSellAll.onClick.AddListener(sellAllOnClick);
+        btnSellAll.onClick.AddListener(SellAllOnClick);
+
+        // shop
+        Button btnEnterShop = enterShopButton.GetComponent<Button>();
+        btnEnterShop.onClick.AddListener(enterShopOnClick);
     }
 
     // als main clicked
@@ -66,38 +60,9 @@ public class ButtonManager : MonoBehaviour
     }
 
     // click increase max
-    void increaseMaxOnClick()
-    {
-        // activeer deze functie in ander script
-        increaseMax.increaseMaxClicked();
+    
 
-    }
-
-
-
-    // click increase max
-    void funnelOnClick()
-    {
-
-        funnelManager.funnelClicked();
-        // check of eerste keer geklickt op deze knop
-        funnelPressedFirst = true;
-        
-        // als wel eerste keer is
-        if (funnelPressedFirst && funnelManager.level == 1)
-        {
-            
-            // set button text naar dit VVVVVVV
-            funnelButtonText.text = "Upgrade Funnel";
-            // verander naar control = 1 voor eenmalige uitvoering van deze functie.
-        }
-
-        // activeer deze functie in ander script
-        
-
-    }
-
-    void sellAllOnClick()
+    void SellAllOnClick()
     {
         if (waterManager.water == 0) return;
 
@@ -108,6 +73,16 @@ public class ButtonManager : MonoBehaviour
         waterManager.printWater();
         moneyManager.printMoney();
         
+
+
+    }
+
+
+    void enterShopOnClick()
+    {
+        shopEnabled = true;
+        shop.enabled = true;
+
     }
 
 }

@@ -26,6 +26,10 @@ public class MoneyManager : MonoBehaviour
         Debug.Log("Money: " + money);
         buttonManager.moneyText.text = "Money: " + Math.Round(money, 2);
 
+
+
+
+
     }
 
 
