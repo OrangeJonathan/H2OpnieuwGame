@@ -8,24 +8,27 @@ public class MoneyManager : MonoBehaviour
 {
     [Header("Scripts")]
     [SerializeField] ButtonManager buttonManager;
-    [SerializeField] funnelManager funnelManager;
-    [SerializeField] GameManager gameManager;
-    [SerializeField] IncreaseMax increaseMax;
-    [SerializeField] WaterManager waterManager;
 
 
     [Header("Money")]
     public double money;
-    public double moneyMultiplier = 1;
 
    
+    public void increaseMoney(double moneyAdded)
+    {
+        money += moneyAdded;
+    }
+
+    public void decreaseMoney(double moneyRemoved)
+    {
+        money -= moneyRemoved;
+    }
 
 
     public void printMoney()
     {
         Debug.Log("Money: " + money);
         buttonManager.moneyText.text = "Money: " + Math.Round(money, 2);
-
     }
 
 
