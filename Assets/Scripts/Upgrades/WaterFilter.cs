@@ -39,6 +39,18 @@ public class WaterFilter : Upgrades
         btnWaterFilter.onClick.AddListener(WaterFilterClicked);
     }
 
+    public void Update()
+    {
+        if (moneyManager.money < cost)
+        {
+            waterFilterButton.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            waterFilterButton.GetComponent<Image>().color = Color.green;
+        }
+    }
+
     public void WaterFilterClicked()
     {
         if (moneyManager.money >= cost)
@@ -48,7 +60,7 @@ public class WaterFilter : Upgrades
 
             ButtonManager.moneyMultiplier *= 1.5;
 
-            moneyManager.money = moneyManager.money - cost;
+            moneyManager.money -= cost;
 
             moneyManager.printMoney();
             upgradeLevel++;
@@ -56,7 +68,6 @@ public class WaterFilter : Upgrades
             // Maak duurder
             cost *= costMultiplier;
 
-            waterFilterButton.GetComponent<Image>().color = Color.green;
             //Set level en Cost
             waterFilterLevel.text = upgradeLevel.ToString();
             waterFilterCost.text = Math.Round(cost).ToString();
@@ -65,7 +76,6 @@ public class WaterFilter : Upgrades
         // niet genoeg moneyz
         else
         {
-            waterFilterButton.GetComponent<Image>().color = Color.red;
             Debug.Log("niet genoeg");
         }
         
