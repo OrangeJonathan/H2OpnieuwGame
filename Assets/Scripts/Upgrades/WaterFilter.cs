@@ -11,7 +11,6 @@ public class WaterFilter : Upgrades
     [SerializeField] ButtonManager ButtonManager;
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
-    [SerializeField] ShopManager shopManager;
 
     [Header("Water Filter")]
     public Button waterFilterButton;

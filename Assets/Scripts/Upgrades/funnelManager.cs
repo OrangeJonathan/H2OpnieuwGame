@@ -12,8 +12,6 @@ public class funnelManager : Upgrades
     [Header("Scripts")]
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
-    [SerializeField] ShopManager shopManager;
-
 
 
     // funnel button

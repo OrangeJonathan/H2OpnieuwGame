@@ -12,7 +12,6 @@ public class IncreaseMax : Upgrades
     [Header("Scripts")]
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
-    [SerializeField] ShopManager shopManager;
 
     [Header("Increase Max")]
     public Button increaseMaxButton;
