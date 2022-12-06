@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WaterManager : MonoBehaviour
+public class WaterManager : MonoBehaviour, IDataPersistence
 {
 
     [Header("Scripts")]
@@ -22,6 +22,15 @@ public class WaterManager : MonoBehaviour
     public double autoWater = 0;
     public double autoWaterMs = 0;
 
+    public void LoadData(GameData data)
+    {
+        maxWater = data.maxWater;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.maxWater = maxWater;
+    }
 
     public double DelayAmount = 0.01; // Second count
 
