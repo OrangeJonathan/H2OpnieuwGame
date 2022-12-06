@@ -10,14 +10,9 @@ public class funnelManager : Upgrades
 
     // Link scripts
     [Header("Scripts")]
-    [SerializeField] ButtonManager ButtonManager;
-    [SerializeField] IncreaseMax IncreaseMax;
-    [SerializeField] GameManager gameManager;
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
     [SerializeField] ShopManager shopManager;
-    [SerializeField] ClickUpgrade clickUpManager;
-    public int level;
 
 
 
@@ -30,12 +25,12 @@ public class funnelManager : Upgrades
 
 
     [Header("UpgradeProperties")]
-    public Upgrades upgrades;
+    public Upgrades funnelUpgrade;
 
 
     public void Update()
     {
-        if (moneyManager.money < upgrades.cost)
+        if (moneyManager.money < cost)
         {
             funnelButton.GetComponent<Image>().color = Color.red;
         }
@@ -65,27 +60,26 @@ public class funnelManager : Upgrades
     public void FunnelClicked()
     {
 
-        if(moneyManager.money >= upgrades.cost)
+        if(moneyManager.money >= cost)
         {
 
-            moneyManager.money -= upgrades.cost;
+            moneyManager.money -= cost;
             moneyManager.printMoney();
 
-            level++;
-            upgrades.upgradeLevel++;
-            Debug.Log(level);
+            funnelUpgrade.upgradeLevel++;
+            Debug.Log(upgradeLevel);
 
             waterManager.autoWater += 1;
 
-            upgrades.cost = upgrades.cost * upgrades.costMultiplier;
+            cost *= costMultiplier;
             
             // Set Level en Cost
-            funnelLevel.text = upgrades.upgradeLevel.ToString();
-            funnelCost.text = Math.Round(upgrades.cost, 2).ToString();
+            funnelLevel.text = upgradeLevel.ToString();
+            funnelCost.text = Math.Round(cost, 2).ToString();
 
 
             // als wel eerste keer is
-            if (upgrades.upgradeLevel >= 1)
+            if (upgradeLevel >= 1)
             {
                 // set button text naar dit VVVVVVV
                 funnelButtonText.text = "Upgrade Funnel";

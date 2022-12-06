@@ -11,7 +11,7 @@ public class ClickUpgrade : Upgrades
     [SerializeField] WaterManager waterManager;
 
     [Header("UpgradeProperties")]
-    public Upgrades clickUp = new();
+    public Upgrades clickUp;
 
     [Header("Click Upgrade Buttons")]
     public Button clickUpButton;
@@ -21,6 +21,7 @@ public class ClickUpgrade : Upgrades
 
     void Start()
     {
+        Upgrades upgrClickUp = clickUp.GetComponent<Upgrades>();
         Button btnClickUp = clickUpButton.GetComponent<Button>();
         Text txtClickUpLevel = clickUpLevel.GetComponent<Text>();
         Text txtClickUpCost = clickUpCost.GetComponent<Text>();

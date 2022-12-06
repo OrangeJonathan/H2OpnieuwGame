@@ -19,28 +19,24 @@ public class ButtonManager : MonoBehaviour
 
     // main button
     [Header("Main Button")]
-    public Button mainButton;
+    [SerializeField] Button mainButton;
     public Text mainButtonText;
 
     
     [Header("Sell Button")]
-    public Button sellButton;
+    [SerializeField] Button sellButton;
     public Text moneyText;
     public double moneyMultiplier;
 
 
     [Header("Shop")]
-    public Button enterShopButton;
-
-
+    [SerializeField] Button enterShopButton;
 
     public bool shopEnabled = true;
     public Canvas shop;
 
     void Start()
     {
-
-
         // check main button input
         Button btnMain = mainButton.GetComponent<Button>();
         Text txtMain = mainButtonText.GetComponent<Text>();

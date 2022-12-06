@@ -648,23 +648,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f85326bf1d2ac4bb6051bc32a73a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameUpgrade: 
-  cost: 0
-  costMultiplier: 0
+  nameUpgrade: Funnel
+  cost: 100
+  costMultiplier: 1.3
   upgradeLevel: 0
-  ButtonManager: {fileID: 234412782}
-  IncreaseMax: {fileID: 1619871568}
-  gameManager: {fileID: 311178884}
   moneyManager: {fileID: 940754898}
   waterManager: {fileID: 2072336384}
   shopManager: {fileID: 1055135540}
-  clickUpManager: {fileID: 7739797}
-  level: 0
   funnelButton: {fileID: 667031707}
   funnelButtonText: {fileID: 188624485}
   funnelLevel: {fileID: 1860517252}
   funnelCost: {fileID: 1411392882}
-  upgrades: {fileID: 1841654711}
+  funnelUpgrade: {fileID: 0}
 --- !u!1 &184901639
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,18 +3327,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8170a6614ca65924ba62bfeb143b57fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonManager: {fileID: 234412782}
-  funnelManager: {fileID: 184118369}
-  gameManager: {fileID: 311178884}
+  nameUpgrade: Increase Max
+  cost: 4
+  costMultiplier: 2
+  upgradeLevel: 0
   moneyManager: {fileID: 940754898}
   waterManager: {fileID: 2072336384}
   shopManager: {fileID: 1055135540}
-  clickUpManager: {fileID: 7739797}
   increaseMaxButton: {fileID: 791320755}
   increaseMaxButtonText: {fileID: 130925071}
   incMaxLevel: {fileID: 2144312618}
   incMaxCost: {fileID: 1922791313}
-  upgrades: {fileID: 1841654711}
+  increaseMaxUpgrade: {fileID: 1841654711}
 --- !u!1 &1633618043
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,19 +3587,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c68aa497090a34f96e51fafab7156e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameUpgrade: Water Filter
+  cost: 300
+  costMultiplier: 1.5
+  upgradeLevel: 0
   ButtonManager: {fileID: 234412782}
-  funnelManager: {fileID: 184118369}
-  gameManager: {fileID: 311178884}
   moneyManager: {fileID: 940754898}
   waterManager: {fileID: 2072336384}
   shopManager: {fileID: 1055135540}
-  increaseMax: {fileID: 1619871568}
-  clickUpManager: {fileID: 7739797}
   waterFilterButton: {fileID: 229377606}
   waterFilterButtonText: {fileID: 1589617478}
   waterFilterLevel: {fileID: 799677850}
   waterFilterCost: {fileID: 40313815}
-  upgrades: {fileID: 1841654711}
+  waterFilterUpgrade: {fileID: 0}
 --- !u!1 &1748279558
 GameObject:
   m_ObjectHideFlags: 0

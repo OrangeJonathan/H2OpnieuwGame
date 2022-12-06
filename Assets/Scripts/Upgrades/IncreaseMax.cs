@@ -10,13 +10,9 @@ public class IncreaseMax : Upgrades
 
     // Link script naar andere Scripts.
     [Header("Scripts")]
-    [SerializeField] ButtonManager ButtonManager;
-    [SerializeField] funnelManager funnelManager;
-    [SerializeField] GameManager gameManager;
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
     [SerializeField] ShopManager shopManager;
-    [SerializeField] ClickUpgrade clickUpManager;
 
     [Header("Increase Max")]
     public Button increaseMaxButton;
@@ -26,7 +22,7 @@ public class IncreaseMax : Upgrades
 
 
     [Header("UpgradeProperties")]
-    public Upgrades upgrades;
+    public Upgrades increaseMaxUpgrade;
 
     //Start
     void Start()
@@ -46,7 +42,7 @@ public class IncreaseMax : Upgrades
 
     public void Update()
     {
-        if (moneyManager.money < upgrades.cost)
+        if (moneyManager.money < cost)
 
         {
             increaseMaxButton.GetComponent<Image>().color = Color.red;
@@ -61,26 +57,26 @@ public class IncreaseMax : Upgrades
     public void increaseMaxClicked()
     {
         // Betaal systeem, als je water hoger of gelijk is aan de prijs "cost"
-        if (moneyManager.money >= upgrades.cost)
+        if (moneyManager.money >= cost)
         {
            
             Debug.Log("Increased Max");
             // Set Max Water + 3
             waterManager.maxWater += 3;
             // Zet water aantal naar water - cost
-            moneyManager.money = moneyManager.money - upgrades.cost;
+            moneyManager.money = moneyManager.money - cost;
             // set text naar water/MaxWater en Money
             moneyManager.printMoney();
             waterManager.printWater();
             // set upgradelevel
-            upgrades.upgradeLevel++;
+            upgradeLevel++;
 
             // Maak duurder
-            upgrades.cost += upgrades.costMultiplier;
+            cost += costMultiplier;
             
             // Set level en Cost
-            incMaxLevel.text = upgrades.upgradeLevel.ToString();
-            incMaxCost.text = Math.Round(upgrades.cost, 2).ToString();
+            incMaxLevel.text = upgradeLevel.ToString();
+            incMaxCost.text = Math.Round(cost, 2).ToString();
         }
 
         // niet genoeg water

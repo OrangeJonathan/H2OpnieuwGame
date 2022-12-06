@@ -9,13 +9,9 @@ public class WaterFilter : Upgrades
 
     [Header("Scripts")]
     [SerializeField] ButtonManager ButtonManager;
-    [SerializeField] funnelManager funnelManager;
-    [SerializeField] GameManager gameManager;
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
     [SerializeField] ShopManager shopManager;
-    [SerializeField] IncreaseMax increaseMax;
-    [SerializeField] ClickUpgrade clickUpManager;
 
     [Header("Water Filter")]
     public Button waterFilterButton;
@@ -25,7 +21,7 @@ public class WaterFilter : Upgrades
 
 
     [Header("UpgradeProperties")]
-    public Upgrades upgrades;
+    public Upgrades waterFilterUpgrade;
 
 
     public void Start()
@@ -45,25 +41,25 @@ public class WaterFilter : Upgrades
 
     public void WaterFilterClicked()
     {
-        if (moneyManager.money >= upgrades.cost)
+        if (moneyManager.money >= cost)
         {
 
             Debug.Log("Water Filter");
 
             ButtonManager.moneyMultiplier *= 1.5;
 
-            moneyManager.money = moneyManager.money - upgrades.cost;
+            moneyManager.money = moneyManager.money - cost;
 
             moneyManager.printMoney();
-            upgrades.upgradeLevel++;
+            upgradeLevel++;
 
             // Maak duurder
-            upgrades.cost *= upgrades.costMultiplier;
+            cost *= costMultiplier;
 
             waterFilterButton.GetComponent<Image>().color = Color.green;
             //Set level en Cost
-            waterFilterLevel.text = upgrades.upgradeLevel.ToString();
-            waterFilterCost.text = Math.Round(upgrades.cost).ToString();
+            waterFilterLevel.text = upgradeLevel.ToString();
+            waterFilterCost.text = Math.Round(cost).ToString();
         }
 
         // niet genoeg moneyz
