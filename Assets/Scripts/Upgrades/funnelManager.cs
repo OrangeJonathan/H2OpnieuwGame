@@ -5,59 +5,84 @@ using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class funnelManager : MonoBehaviour
+public class funnelManager : Upgrades
 {
 
     // Link scripts
     [Header("Scripts")]
-    [SerializeField] ButtonManager ButtonManager;
-    [SerializeField] IncreaseMax IncreaseMax;
-    [SerializeField] GameManager gameManager;
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] WaterManager waterManager;
-    [SerializeField] ShopManager shopManager;
-    [SerializeField] ClickUpManager clickUpManager;
-    public int level;
+
+
+    // funnel button
+    [Header("Funnel")]
+    public Button funnelButton;
+    public Text funnelButtonText;
+    public Text funnelLevel;
+    public Text funnelCost;
 
 
     [Header("UpgradeProperties")]
-    public Upgrades upgrades;
+    public Upgrades funnelUpgrade;
 
 
-    
+    public void Update()
+    {
+        if (moneyManager.money < cost)
+        {
+            funnelButton.GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            funnelButton.GetComponent<Image>().color = Color.green;
+        }
+    }
 
     public void Start()
     {
-        shopManager.funnelButton.enabled = false;
-        shopManager.funnelButton.image.enabled = false;
-        shopManager.funnelButtonText.enabled = false;
-        shopManager.funnelCost.enabled = false;
-        shopManager.funnelLevel.enabled = false;
-        level = upgrades.upgradeLevel;
+        //shopManager.funnelButton.enabled = false;
+        //shopManager.funnelButton.image.enabled = false;
+        //shopManager.funnelButtonText.enabled = false;
+        //shopManager.funnelCost.enabled = false;
+        //shopManager.funnelLevel.enabled = false;
+        //level = upgrades.upgradeLevel;
+        Button btnFunnel = funnelButton.GetComponent<Button>();
+        Text txtFunnel = funnelButtonText.GetComponent<Text>();
+        Text txtFunnelLevel = funnelLevel.GetComponent<Text>();
+        Text txtFunnelCost = funnelCost.GetComponent<Text>();
+        btnFunnel.onClick.AddListener(FunnelClicked);
+
     } 
 
     // Wanneer op knop gedrukt
     public void FunnelClicked()
     {
-        // check of genoeg geld
-        if(moneyManager.money >= upgrades.cost)
+
+        if(moneyManager.money >= cost)
         {
-            // prijs van geld af halen
-            moneyManager.money -= upgrades.cost;
+
+            moneyManager.money -= cost;
             moneyManager.printMoney();
-            // lvl up
-            level++;
-            upgrades.upgradeLevel++;
-            Debug.Log(level);
-            //set autoWater
+
+            funnelUpgrade.upgradeLevel++;
+            Debug.Log(upgradeLevel);
+
             waterManager.autoWater += 1;
 
-            // duurder maken
-            upgrades.cost = upgrades.cost * upgrades.costMultiplier;
+            cost *= costMultiplier;
             
             // Set Level en Cost
-            shopManager.funnelLevel.text = upgrades.upgradeLevel.ToString();
-            shopManager.funnelCost.text = Math.Round(upgrades.cost, 2).ToString();
+            funnelLevel.text = upgradeLevel.ToString();
+            funnelCost.text = Math.Round(cost, 2).ToString();
+
+
+            // als wel eerste keer is
+            if (upgradeLevel >= 1)
+            {
+                // set button text naar dit VVVVVVV
+                funnelButtonText.text = "Upgrade Funnel";
+                // verander naar control = 1 voor eenmalige uitvoering van deze functie.
+            }
         }
 
 
@@ -65,14 +90,14 @@ public class funnelManager : MonoBehaviour
         //print water aantal
         moneyManager.printMoney();
 
-        if ((upgrades.upgradeLevel >= 5) && clickUpManager.upgrades.upgradeLevel >= 20)
-        {
-            shopManager.waterFilterButton.enabled = true;
-            shopManager.waterFilterButton.image.enabled = true;
-            shopManager.waterFilterButtonText.enabled = true;
-            shopManager.waterFilterCost.enabled = true;
-            shopManager.waterFilterLevel.enabled = true;
-        }
+        //if ((upgrades.upgradeLevel >= 5) && clickUpManager.upgradeLevel >= 20)
+        //{
+        //    shopManager.waterFilterButton.enabled = true;
+        //    shopManager.waterFilterButton.image.enabled = true;
+        //    shopManager.waterFilterButtonText.enabled = true;
+        //    shopManager.waterFilterCost.enabled = true;
+        //    shopManager.waterFilterLevel.enabled = true;
+        //}
     }
 
 
