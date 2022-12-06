@@ -26,7 +26,7 @@ public class ButtonManager : MonoBehaviour
     [Header("Sell Button")]
     [SerializeField] Button sellButton;
     public Text moneyText;
-    public double moneyMultiplier;
+    public double moneyMultiplier = 0;
 
 
     [Header("Shop")]
@@ -65,7 +65,7 @@ public class ButtonManager : MonoBehaviour
     {
         if (waterManager.water == 0) return;
 
-        moneyManager.increaseMoney(waterManager.water += moneyMultiplier);
+        moneyManager.money = waterManager.water * moneyMultiplier;
         Debug.Log(moneyManager.money);
         waterManager.water = 0;
         waterManager.printWater();

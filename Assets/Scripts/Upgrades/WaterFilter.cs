@@ -57,7 +57,7 @@ public class WaterFilter : Upgrades
 
             Debug.Log("Water Filter");
 
-            ButtonManager.moneyMultiplier *= 1.5;
+            ButtonManager.moneyMultiplier += 0.1;
 
             moneyManager.money -= cost;
 

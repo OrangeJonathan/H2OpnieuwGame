@@ -40,13 +40,14 @@ public class WaterManager : MonoBehaviour, IDataPersistence
     {
         Timer += Time.deltaTime;
 
-        autoWaterMs = (autoWater / 100);
+        
 
 
        if (autoWater == 0) return;
 
        if (Timer >= DelayAmount)
        {
+            autoWaterMs = (autoWater / 100);
             Timer = 0f;
             water += autoWaterMs;
             if (water > maxWater)
