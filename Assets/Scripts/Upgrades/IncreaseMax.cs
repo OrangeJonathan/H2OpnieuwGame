@@ -67,11 +67,12 @@ public class IncreaseMax : Upgrades
             // Zet water aantal naar water - cost
             moneyManager.money = moneyManager.money - cost;
             // set text naar water/MaxWater en Money
-            moneyManager.printMoney();
-            waterManager.printWater();
+            
             // set upgradelevel
             upgradeLevel++;
             waterManager.maxWater = (upgradeLevel * 3) + 5;
+            moneyManager.printMoney();
+            waterManager.printWater();
 
             // Maak duurder
             cost += costMultiplier;

@@ -39,7 +39,7 @@ public class WaterFilter : Upgrades
         Text txtWaterFilterCost = waterFilterCost.GetComponent<Text>();
         btnWaterFilter.onClick.AddListener(WaterFilterClicked);
 
-        ButtonManager.moneyMultiplier = (upgradeLevel * 0.1);
+        ButtonManager.moneyMultiplier = (upgradeLevel * 0.1) + 1;
     }
 
     public void Update()

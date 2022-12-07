@@ -28,7 +28,7 @@ public class ClickUpgrade : Upgrades
         Text txtClickUpCost = clickUpCost.GetComponent<Text>();
         btnClickUp.onClick.AddListener(clickUpOnClick);
 
-        waterManager.waterPower = upgradeLevel;
+        waterManager.waterPower = upgradeLevel + 1;
     }
     public void Update()
     {
