@@ -24,12 +24,12 @@ public class WaterManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        maxWater = data.maxWater;
+        water = data.Water;
     }
 
     public void SaveData(ref GameData data)
     {
-        data.maxWater = maxWater;
+        data.Water = water;
     }
 
     public double DelayAmount = 0.01; // Second count

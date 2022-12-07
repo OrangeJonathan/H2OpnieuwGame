@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoneyManager : MonoBehaviour
+public class MoneyManager : MonoBehaviour, IDataPersistence
 {
     [Header("Scripts")]
     [SerializeField] ButtonManager buttonManager;
@@ -24,15 +24,19 @@ public class MoneyManager : MonoBehaviour
         money -= moneyRemoved;
     }
 
-
     public void printMoney()
     {
         Debug.Log("Money: " + money);
         buttonManager.moneyText.text = "Money: " + Math.Round(money, 2);
     }
 
+    public void LoadData(GameData data)
+    {
+        money = data.Money;
+    }
 
-
-
-
+    public void SaveData(ref GameData data)
+    {
+        data.Money = money;
+    }
 }
