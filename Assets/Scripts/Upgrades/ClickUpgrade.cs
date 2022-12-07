@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// add , IDataPersistence
 public class ClickUpgrade : Upgrades
 {
     [Header("Scripts")]
@@ -26,6 +27,8 @@ public class ClickUpgrade : Upgrades
         Text txtClickUpLevel = clickUpLevel.GetComponent<Text>();
         Text txtClickUpCost = clickUpCost.GetComponent<Text>();
         btnClickUp.onClick.AddListener(clickUpOnClick);
+
+        waterManager.waterPower = upgradeLevel;
     }
     public void Update()
     {
@@ -46,11 +49,10 @@ public class ClickUpgrade : Upgrades
         {
             Debug.Log("Increased Clicks");
 
-            waterManager.waterPower++;
-
             moneyManager.money -= cost;
 
             upgradeLevel++;
+            waterManager.waterPower = upgradeLevel;
             cost += costMultiplier;
 
             moneyManager.printMoney();
@@ -76,6 +78,16 @@ public class ClickUpgrade : Upgrades
         //    incMaxLevel.enabled = true;
         //}
     }
+
+    //public void LoadData(GameData data)
+    //{
+    //    upgradeLevel = data.ClickLevel; ;
+    //}
+
+    //public void SaveData(ref GameData data)
+    //{
+    //    data.ClickLevel = upgradeLevel;
+    //}
 
 
 
