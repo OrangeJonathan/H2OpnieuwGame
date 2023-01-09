@@ -9,33 +9,43 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class RainManager : MonoBehaviour
 {
+    [Header("Managers")]
+    [SerializeField] DateManager dateManager;
+
+
+    [Header("Sliders and Inputfields")]
     [SerializeField] Slider rainSlider;
     [SerializeField] Slider waterUsageSlider;
     [SerializeField] InputField rainInputField;
     [SerializeField] InputField waterUsageInputField;
 
-    float rainAmountmm = 0;
-    float waterUseAmountL = 0;
-    int day = 0;
-    int tankMaxL = 10000;   
-    float tankCurrentL = 0;
+    [Header("Tank")]
+    [SerializeField] Slider tankSlider; // puur voor de visuals, niet waar data wordt uitgehaald
+    public int tankMaxL = 10000;
+    public float tankCurrentL = 0;
 
+    [Header("Text")]
+    [SerializeField] Text tankText;
+    [SerializeField] Text dayText;
+
+
+    [Header("rest")]
+    //float rainAmountmm = 0;
+    //float waterUseAmountL = 0;
+    
+    float waterGovernmentL = 0;
 
     SliderClass rainClass;
     SliderClass WaterUsageClass;
-
-    //public RainManager()
-    //{
-    //    rainClass = new SliderClass(rainSlider, rainInputField);
-    //    WaterUsageClass = new SliderClass(waterUsageSlider, waterUsageInputField);
-    //}
-
 
     // Start is called before the first frame update
     public void Start()
     {
         rainClass = new SliderClass(rainSlider, rainInputField);
         WaterUsageClass = new SliderClass(waterUsageSlider, waterUsageInputField);
+        
+
+        
     }
 
 
@@ -43,20 +53,7 @@ public class RainManager : MonoBehaviour
     protected float Timer;
     public void Update()
     {
-        Timer += Time.deltaTime;
-
-
-        if (Timer >= DelayAmount)
-        {
-            Timer = 0f;
-            day++;
-            
-            FillTank();
-            UseWater();
-            
-
-            Debug.Log(tankCurrentL + "/" + tankMaxL);
-        }
+        
     }
 
     public void SyncRain()
@@ -69,38 +66,35 @@ public class RainManager : MonoBehaviour
         WaterUsageClass.SyncSliderInputField();
     }
 
-
-    public void ChangeRainSlider()
-    {
-        rainAmountmm = rainSlider.value;
-        rainInputField.text = rainSlider.value.ToString();
-
-        Debug.Log(rainAmountmm);
-    }
-
-    public void ChangeRainInputField()
-    {
-        rainAmountmm = float.Parse(rainInputField.text);
-        rainSlider.value = float.Parse(rainInputField.text);
-
-        Debug.Log(rainAmountmm);
-    }
-    public void ChangeWaterUsage()
-    {
-        waterUseAmountL = waterUsageSlider.value;
-        Debug.Log(waterUseAmountL);
-    }
-
     public void FillTank()
     {
         if (tankCurrentL >= tankMaxL) return;
 
-        tankCurrentL += rainAmountmm;
-
+        tankCurrentL += rainClass.GetValue();
+        ChangeTankText();
     }
 
     public void UseWater()
     {
-        tankCurrentL -= waterUseAmountL;
+        tankCurrentL -= WaterUsageClass.GetValue();
+
+        if (tankCurrentL < 0)
+        {
+            waterGovernmentL += (tankCurrentL) * -1;
+            tankCurrentL = 0;
+            Debug.Log("Water Government: " + waterGovernmentL);
+        }
+
+        ChangeTankText();
     }
+
+    public void ChangeTankText()
+    {
+        tankText.text = tankCurrentL.ToString() + "/10000";
+        tankSlider.GetComponentInChildren<Slider>().value = tankCurrentL;
+    }
+
+    
+
+
 }
