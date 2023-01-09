@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataPersistenceManager : MonoBehaviour
 {
@@ -25,14 +26,33 @@ public class DataPersistenceManager : MonoBehaviour
             Debug.LogError("More than one Data Persistence Manager in the scene.");
         }
         instance = this;
+
+        this.DataHandler = new FileDataHandler(Application.persistentDataPath, FileName);
     }
 
-    // Laden van data zodra het spel wordt gestart.
-    private void Start()
+    private void OnEnable()
     {
-        this.DataHandler = new FileDataHandler(Application.persistentDataPath, FileName);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("OnSceneLoaded Called");
         this.DataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
+    }
+
+    private void OnSceneUnloaded(Scene scene)
+    {
+        Debug.Log("OnSceneUnloaded Called");
+        SaveGame();
     }
 
     // Aanmaken van nieuwe 'savefile'.
@@ -57,8 +77,6 @@ public class DataPersistenceManager : MonoBehaviour
     // Laden van gamedata.
     public void LoadGame()
     {
-        // TODO - Opgeslagen data laden uit een file.
-
         this.GameData = DataHandler.Load();
 
         // Als er geen gamedata is, dan nieuwe game maken.
