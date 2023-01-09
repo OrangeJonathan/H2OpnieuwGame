@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
+// add , IDataPersistence
 public class funnelManager : Upgrades
 {
 
@@ -52,6 +53,7 @@ public class funnelManager : Upgrades
         Text txtFunnelCost = funnelCost.GetComponent<Text>();
         btnFunnel.onClick.AddListener(FunnelClicked);
 
+        waterManager.autoWater = upgradeLevel;
     } 
 
     // Wanneer op knop gedrukt
@@ -67,7 +69,7 @@ public class funnelManager : Upgrades
             funnelUpgrade.upgradeLevel++;
             Debug.Log(upgradeLevel);
 
-            waterManager.autoWater += 1;
+            waterManager.autoWater = upgradeLevel;
 
             cost *= costMultiplier;
             
@@ -99,6 +101,16 @@ public class funnelManager : Upgrades
         //    shopManager.waterFilterLevel.enabled = true;
         //}
     }
+
+    //public void LoadData(GameData data)
+    //{
+    //    upgradeLevel = data.FunnelLevel;
+    //}
+
+    //public void SaveData(ref GameData data)
+    //{
+    //    data.FunnelLevel = upgradeLevel;
+    //}
 
 
 

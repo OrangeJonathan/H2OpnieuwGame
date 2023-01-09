@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// add , IDataPersistence
 public class IncreaseMax : Upgrades
 
 {
@@ -37,6 +38,8 @@ public class IncreaseMax : Upgrades
         Text txtIncMax = incMaxCost.GetComponent<Text>();
         btnIncreaseMax.onClick.AddListener(increaseMaxClicked);
 
+        waterManager.maxWater = (upgradeLevel * 3) + 5;
+
     }
 
     public void Update()
@@ -60,15 +63,16 @@ public class IncreaseMax : Upgrades
         {
            
             Debug.Log("Increased Max");
-            // Set Max Water + 3
-            waterManager.maxWater += 3;
+
             // Zet water aantal naar water - cost
             moneyManager.money = moneyManager.money - cost;
             // set text naar water/MaxWater en Money
-            moneyManager.printMoney();
-            waterManager.printWater();
+            
             // set upgradelevel
             upgradeLevel++;
+            waterManager.maxWater = (upgradeLevel * 3) + 5;
+            moneyManager.printMoney();
+            waterManager.printWater();
 
             // Maak duurder
             cost += costMultiplier;
@@ -86,4 +90,16 @@ public class IncreaseMax : Upgrades
 
 
     }
+
+
+
+    //public void LoadData(GameData data)
+    //{
+    //    upgradeLevel = data.OpslagTankLevel;
+    //}
+
+    //public void SaveData(ref GameData data)
+    //{
+    //    data.OpslagTankLevel = upgradeLevel;
+    //}
 }
