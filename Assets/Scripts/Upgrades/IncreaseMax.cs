@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// add , IDataPersistence
-public class IncreaseMax : Upgrades
+public class IncreaseMax : Upgrades, IDataPersistence
 
 {
 
@@ -23,6 +22,18 @@ public class IncreaseMax : Upgrades
 
     [Header("UpgradeProperties")]
     public Upgrades increaseMaxUpgrade;
+
+    public void LoadData(GameData data)
+    {
+        Debug.Log("upgradelevel is: " + upgradeLevel);
+        upgradeLevel = data.OpslagTankLevel;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        Debug.Log("upgradelevel is: " + upgradeLevel);
+        data.OpslagTankLevel = upgradeLevel;
+    }
 
     //Start
     void Start()
