@@ -14,15 +14,18 @@ public class MoneyManager : MonoBehaviour, IDataPersistence
     public double money;
 
    
-    public void increaseMoney(double moneyAdded)
+    public double increaseMoney(double moneyAdded)
     {
         money += moneyAdded;
+        return money;
     }
 
-    public void decreaseMoney(double moneyRemoved)
+    public double decreaseMoney(double moneyRemoved)
     {
         money -= moneyRemoved;
+        return money;
     }
+
 
     public void printMoney()
     {

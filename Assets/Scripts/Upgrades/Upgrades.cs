@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class Upgrades : MonoBehaviour
 {
 
-    public string nameUpgrade;
+    [SerializeField] string nameUpgrade;
     public double cost;
     public double costMultiplier;
     public int upgradeLevel;
-
+    
 }

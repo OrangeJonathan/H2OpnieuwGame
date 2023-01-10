@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+// add , IDataPersistence
 public class WaterFilter : Upgrades
 {
 
@@ -36,6 +38,8 @@ public class WaterFilter : Upgrades
         Text txtWaterFilterLevel = waterFilterLevel.GetComponent<Text>();
         Text txtWaterFilterCost = waterFilterCost.GetComponent<Text>();
         btnWaterFilter.onClick.AddListener(WaterFilterClicked);
+
+        ButtonManager.moneyMultiplier = (upgradeLevel * 0.1) + 1;
     }
 
     public void Update()
@@ -57,12 +61,13 @@ public class WaterFilter : Upgrades
 
             Debug.Log("Water Filter");
 
-            ButtonManager.moneyMultiplier *= 1.5;
+            
 
             moneyManager.money -= cost;
 
             moneyManager.printMoney();
             upgradeLevel++;
+            ButtonManager.moneyMultiplier = (upgradeLevel * 0.1);
 
             // Maak duurder
             cost *= costMultiplier;
@@ -80,6 +85,14 @@ public class WaterFilter : Upgrades
         
     }
 
+    //public void LoadData(GameData data)
+    //{
+    //    upgradeLevel = data.WaterFilterLevel;
+    //}
 
-    
+    //public void SaveData(ref GameData data)
+    //{
+    //    data.WaterFilterLevel = upgradeLevel;
+    //}
+
 }
